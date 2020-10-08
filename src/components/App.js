@@ -1,17 +1,18 @@
 import React from "react";
 import { BrowserRouter, Route } from "react-router-dom";
 import StreamCreate from "./streams/StreamCreate";
-import StreamDelete from "./streams/StreamDelete";
 import StreamEdit from "./streams/StreamEdit";
+import StreamDelete from "./streams/StreamDelete";
 import StreamList from "./streams/StreamList";
 import StreamShow from "./streams/StreamShow";
-
+import Header from "./Header";
 
 const App = () => {
   return (
-    <div>
+    <div className="ui container">
       <BrowserRouter>
         <div>
+          <Header />
           <Route path="/" exact component={StreamList} />
           <Route path="/streams/new" exact component={StreamCreate} />
           <Route path="/streams/edit" exact component={StreamEdit} />
@@ -24,3 +25,10 @@ const App = () => {
 };
 
 export default App;
+
+// Besides BrowserRouter there are HashRouter and MemoryRouter
+// HashRouter uses everything after # in path to be able to deal with servers that return 404 on non-existent paths,
+// and React always responds with index.html
+// MemoryRouter does not use URL to track navigation
+
+// exact in Route is to avoid paths containing one another (React is able to render different routes on same screen)
