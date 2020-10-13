@@ -64,6 +64,22 @@ class GoogleAuth extends React.Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  return { isSignedIn: state.auth.isSignedIn };
+};
+
+export default connect(mapStateToProps, { signIn, signOut })(GoogleAuth);
+
+
+// gapi is wired up in index.html (no npm package available), useful to work with Google services
+// Can play with gapi in browser console
+// gapi.load downloads client:auth2 service, after that gapi client initializes library and returns a promise:
+// Tap into auth instance and leverage isSignedIn.get() method to capture user's status in state
+// Leverage listen() method to pass it a callback to be invoked every time user status changes.
+// listen() passes true to this function when the user signs in, and false when the user signs out.
+
+
+
 // // Without Redux
 // class GoogleAuth extends React.Component {
 //   state = { isSignedIn: null };
@@ -118,17 +134,3 @@ class GoogleAuth extends React.Component {
 //     return <div>{this.renderAuthButton()}</div>;
 //   }
 // }
-
-const mapStateToProps = (state) => {
-  return { isSignedIn: state.auth.isSignedIn };
-};
-
-export default connect(mapStateToProps, { signIn, signOut })(GoogleAuth);
-
-
-// gapi is wired up in index.html (no npm package available), useful to work with Google services
-// Can play with gapi in browser console
-// gapi.load downloads client:auth2 service, after that gapi client initializes library and returns a promise:
-// Tap into auth instance and leverage isSignedIn.get() method to capture user's status in state
-// Leverage listen() method to pass it a callback to be invoked every time user status changes.
-// listen() passes true to this function when the user signs in, and false when the user signs out.
