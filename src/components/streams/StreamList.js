@@ -10,9 +10,12 @@ class StreamList extends React.Component {
 
   renderAdminButtons(stream) {
     if (stream.userId === this.props.adminId) {
+      // URL-based navigation in Link, see path="/streams/edit/:streamId" in App
       return (
         <div className="right floated content">
-          <button className="ui button primary">Edit</button>
+          <Link to={`streams/edit/${stream.id}`} className="ui button primary">
+            Edit
+          </Link>
           <button className="ui button negative">Delete</button>
         </div>
       );
@@ -37,8 +40,10 @@ class StreamList extends React.Component {
   renderCreateLink() {
     if (this.props.isSignedIn) {
       return (
-        <div style={{textAlign: "right"}}>
-          <Link to="/streams/new" className="ui button secondary"> +  Create Stream</Link>
+        <div style={{ textAlign: "right" }}>
+          <Link to="/streams/new" className="ui button secondary">
+            + Create Stream
+          </Link>
         </div>
       );;
     }

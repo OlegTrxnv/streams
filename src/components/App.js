@@ -16,7 +16,7 @@ const App = () => {
           <Header />
           <Route path="/" exact component={StreamList} />
           <Route path="/streams/new" exact component={StreamCreate} />
-          <Route path="/streams/edit" exact component={StreamEdit} />
+          <Route path="/streams/edit/:streamId" exact component={StreamEdit} />
           <Route path="/streams/delete" exact component={StreamDelete} />
           <Route path="/streams/show" exact component={StreamShow} />
         </div>
@@ -35,3 +35,4 @@ export default App;
 // MemoryRouter does not use URL to track navigation
 
 // exact in Route is to avoid paths containing one another (React is able to render different routes on same screen)
+// With React-Router, each component needs to be designed to work in isolation (fetch its own data and don't rely on other components)
