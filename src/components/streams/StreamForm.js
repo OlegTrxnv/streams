@@ -27,7 +27,7 @@ class StreamForm extends React.Component {
   };
 
   onSubmit = (formValues) => {
-    // onSubmit is coming from StreamCreate, but technically ReduxForm does it
+    // onSubmit is coming from parent component, but technically ReduxForm does it
     // because when exporting this component we wrap it in reduxForm
     this.props.onSubmit(formValues);
   };
@@ -82,6 +82,6 @@ export default reduxForm({
 //  <input onChange={formProps.input.onChange} value={} .../>
 // Field passes all to renderInput all unfamiliar properties as well (label for example)
 // Redux-form takes care of the rest. All inputs are in store now!
-// handleSubmit prevents default on form and passes to onSubmit helper formValues
+// handleSubmit prevents default on form submission and passes to onSubmit helper Field inputs content (formValues)
 // redux-form runs validate every time user input changes, it is expected to return errors object
 // errors object entries are available on meta.error for according Field names together with meta.touched and much more

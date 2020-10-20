@@ -45,10 +45,16 @@ export const fetchStream = (id) => async (dispatch) => {
   dispatch({ type: FETCH_STREAM, payload: response.data });
 };
 
+// Often times APIs are configured as follows:
+//  PUT requests update ALL properties of a record with only what you actually provide on submission
+//  (form sends title and description, but not userId, of course, and it will be missing)
+//  need to use PATCH request then to update SOME of properties
 export const editStream = (id, formValues) => async (dispatch) => {
-  const response = await streams.put(`/streams/${id}`, formValues);
+  const response = await streams.patch(`/streams/${id}`, formValues);
 
   dispatch({ type: EDIT_STREAM, payload: response.data });
+
+  history.push("/");
 };
 
 export const deleteStream = (id) => async (dispatch) => {
