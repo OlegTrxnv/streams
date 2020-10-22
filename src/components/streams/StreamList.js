@@ -8,15 +8,22 @@ class StreamList extends React.Component {
     this.props.fetchStreams();
   }
 
-  renderAdminButtons(stream) {
+  renderAdmin(stream) {
     if (stream.userId === this.props.adminId) {
-      // URL-based navigation in Link, see path="/streams/edit/:streamId" in App
+      // URL-based navigation in Link, see path="/streams/edit/:id" in App
       return (
         <div className="right floated content">
-          <Link to={`streams/edit/${stream.id}`} className="ui button primary">
+          <Link
+            to={`streams/edit/${stream.id}`}
+            className="ui button primary">
             Edit
           </Link>
-          <button className="ui button negative">Delete</button>
+          <Link
+            to={`streams/delete/${stream.id}`}
+            className="ui button negative"
+          >
+            Delete
+          </Link>
         </div>
       );
     }
@@ -26,7 +33,7 @@ class StreamList extends React.Component {
     return this.props.streams.map((stream) => {
       return (
         <div className="item" key={stream.id}>
-          {this.renderAdminButtons(stream)}
+          {this.renderAdmin(stream)}
           <i className="large middle aligned icon camera" />
           <div className="content">
             {stream.title}
@@ -45,7 +52,7 @@ class StreamList extends React.Component {
             + Create Stream
           </Link>
         </div>
-      );;
+      );
     }
   }
 
@@ -55,7 +62,6 @@ class StreamList extends React.Component {
         {this.renderCreateLink()}
         <h2>Streams</h2>
         <div className="ui celled list">{this.renderList()}</div>
-
       </div>
     );
   }

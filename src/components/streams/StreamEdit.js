@@ -4,13 +4,13 @@ import { fetchStream, editStream } from "../../actions";
 import StreamForm from "./StreamForm";
 
 class StreamEdit extends React.Component {
-  // fetch your own data
+  // fetch it's own data
   componentDidMount() {
-    this.props.fetchStream(this.props.match.params.streamId);
+    this.props.fetchStream(this.props.match.params.id);
   }
 
   onSubmit = (formValues) => {
-    this.props.editStream(this.props.match.params.streamId, formValues)
+    this.props.editStream(this.props.match.params.id, formValues);
   };
 
   render() {
@@ -19,25 +19,25 @@ class StreamEdit extends React.Component {
       return <div>Loading...</div>;
     }
     // grabbing info for initialValues
-    const {title, description} = this.props.stream;
+    const { title, description } = this.props.stream;
 
     return (
       <div>
         <h3>Edit your Stream</h3>
         <StreamForm
-        // initialValues sent to StreamForm are handled by wrapping it ReduxForm
-            initialValues={{  title: title, description: description  }}
-            onSubmit={this.onSubmit}
+          // initialValues sent to StreamForm are handled by wrapping it ReduxForm
+          initialValues={{ title: title, description: description }}
+          onSubmit={this.onSubmit}
         />
       </div>
     );
   }
 }
 
-// ownProps are the props provided to component by Router: match, history, location.
+// ownProps are provided to component by Router: match, history, location.
 const mapStateToProps = (state, ownProps) => {
-  // return stream object from state with key matching :streamId provided by Router in App
-  return { stream: state.streams[ownProps.match.params.streamId] };
+  // return stream object from state with key matching :id provided by Router in App
+  return { stream: state.streams[ownProps.match.params.id] };
 };
 
 export default connect(mapStateToProps, { fetchStream, editStream })(
