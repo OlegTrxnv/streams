@@ -10,29 +10,31 @@ class DeleteStream extends React.Component {
     this.props.fetchStream(this.props.match.params.id);
   }
 
+  renderContent = () => {
+    if (!this.props.stream) {
+      return "Delete your stream?";
+    }
+
+    return `Delete your stream ${this.props.stream.title}?`;
+  };
+
   renderActions = () => {
     const { id } = this.props.match.params;
 
     return (
       <React.Fragment>
-        <button onClick={() => this.props.deleteStream(id)}
+        <button
+          onClick={() => this.props.deleteStream(id)}
           className="ui button negative"
         >
           Delete
         </button>
-        <Link to="/" className="ui button">Cancel</Link>
+        <Link to="/" className="ui button">
+          Cancel
+        </Link>
       </React.Fragment>
     );
   };
-
-  renderContent = () => {
-    if (!this.props.stream) {
-      return "Delete your stream?"
-    }
-
-    return `Delete your stream ${this.props.stream.title}?`
-  }
-
 
   render() {
     return (
@@ -43,7 +45,6 @@ class DeleteStream extends React.Component {
         onDismiss={() => history.push("/")}
       />
     );
-
   }
 }
 

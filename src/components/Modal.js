@@ -9,7 +9,7 @@ const Modal = (props) => {
       className="ui dimmer modals visible active"
     >
       <div
-        // do not hide modal when click on modal message
+        // do not hide modal if modal message clicked
         onClick={(e) => e.stopPropagation()}
         className="ui standard modal visible active"
       >
