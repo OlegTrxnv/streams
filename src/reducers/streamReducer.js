@@ -6,7 +6,7 @@ import {
   FETCH_STREAMS,
 } from "../actions/types";
 
-export default (state = {}, action) => {
+const streamReducer = (state = {}, action) => {
   switch (action.type) {
     case FETCH_STREAMS:
       return {
@@ -29,6 +29,7 @@ export default (state = {}, action) => {
   }
 };
 
+export default streamReducer;
 
 // FETCH_STREAMS: API returns streams as array of objects:
 //  [ {id: 1, title: , description: }, {id: 2 , title: , description: }, {}, ...]
